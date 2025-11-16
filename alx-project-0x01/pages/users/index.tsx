@@ -18,7 +18,7 @@ const Users: React.FC<UsersPageProps> = ({ posts }) => {
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts?.map((user: UserProps) => (
+          {posts.map((user: UserProps) => (
             <UserCard 
               key={user.id}
               id={user.id}
@@ -38,21 +38,12 @@ const Users: React.FC<UsersPageProps> = ({ posts }) => {
 }
 
 export async function getStaticProps() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users")
-    const posts = await response.json()
+  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  const posts = await response.json()
 
-    return {
-      props: {
-        posts
-      }
-    }
-  } catch (error) {
-    console.error("Error fetching users:", error)
-    return {
-      props: {
-        posts: []
-      }
+  return {
+    props: {
+      posts
     }
   }
 }
